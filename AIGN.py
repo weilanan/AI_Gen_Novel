@@ -1,12 +1,6 @@
 import os
 import re
 import time
-from typing import Optional
-
-import agentscope
-from agentscope.agents import AgentBase, DialogAgent, UserAgent
-from agentscope.message import Msg
-from agentscope.prompt import PromptEngine, PromptType
 
 from AIGN_Prompt import *
 
@@ -24,7 +18,7 @@ def Retryer(func, max_retries=10):
     return wrapper
 
 
-class MarkdownAgent(AgentBase):
+class MarkdownAgent:
     """专门应对输入输出都是md格式的情况，例如小说生成"""
 
     def __init__(
@@ -39,7 +33,6 @@ class MarkdownAgent(AgentBase):
         # first_replay=None,
         is_speak=True,
     ) -> None:
-        super().__init__(name=name, use_memory=False)
 
         self.chatLLM = chatLLM
         self.sys_prompt = sys_prompt
@@ -55,8 +48,8 @@ class MarkdownAgent(AgentBase):
         else:
             resp = chatLLM(messages=self.history)
             self.history.append({"role": "assistant", "content": resp["content"]})
-            if self.is_speak:
-                self.speak(Msg(self.name, resp["content"]))
+            # if self.is_speak:
+            #     self.speak(Msg(self.name, resp["content"]))
 
     def query(self, user_input: str) -> str:
         resp = self.chatLLM(
@@ -94,13 +87,13 @@ class MarkdownAgent(AgentBase):
             if (k not in sections) or (len(sections[k]) == 0):
                 raise ValueError(f"fail to parse {k} in output:\n{output}\n\n")
 
-        if self.is_speak:
-            self.speak(
-                Msg(
-                    self.name,
-                    f"total_tokens: {resp['total_tokens']}\n{resp['content']}\n",
-                )
-            )
+        # if self.is_speak:
+        #     self.speak(
+        #         Msg(
+        #             self.name,
+        #             f"total_tokens: {resp['total_tokens']}\n{resp['content']}\n",
+        #         )
+        #     )
         return sections
 
     def invoke(self, inputs: dict, output_keys: list) -> dict:
@@ -120,7 +113,6 @@ class MarkdownAgent(AgentBase):
 
 class AIGN:
     def __init__(self, chatLLM):
-        agentscope.init()
         self.chatLLM = chatLLM
 
         self.novel_outline = ""

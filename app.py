@@ -7,7 +7,7 @@ import gradio as gr
 from AIGN import AIGN
 from LLM import chatLLM
 
-STREAM_INTERVAL = 0.2
+STREAM_INTERVAL = 0.
 
 def make_middle_chat():
     carrier = threading.Event()

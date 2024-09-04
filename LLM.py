@@ -1,6 +1,6 @@
 from uniai import aliChatLLM, deepseekChatLLM, zhipuChatLLM
 
-chatLLM = deepseekChatLLM()
+chatLLM = aliChatLLM("qwen-long")
 
 if __name__ == "__main__":
 

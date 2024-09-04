@@ -39,7 +39,7 @@
 
 ## 在线体验
 
-https://modelscope.cn/studios/cjyyxn/AI_Gen_Novel/summary
+<https://modelscope.cn/studios/cjyyxn/AI_Gen_Novel/summary>
 
 ![](PasteImage/2024-04-11-15-01-21.png)
 
@@ -63,3 +63,6 @@ pip install -r requirements.txt
 
 - 运行`app.py`启动一个基于gradio的应用，通过打开显示的链接，你可以体验到AI小说生成的可视化过程。
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=cjyyx/AI_Gen_Novel&type=Date)](https://star-history.com/#cjyyx/AI_Gen_Novel&Date)
